@@ -2,10 +2,64 @@
 //
 
 #include <iostream>
+#include <list>
+#include <string>
+using namespace std;
+list<string> buisnesses;
+
+void listFormatter(string item) {
+    list<string>::iterator itr = buisnesses.begin();
+    //++itr;
+    
+    buisnesses.insert(itr, item);
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    string buisness;
+    bool wantContinue = true;
+    cout << "Please enter buisness name!\n";
+    getline(cin, buisness);
+
+    cout << "\nYour Buisness is:\n";
+
+    listFormatter(buisness);
+
+    for (string x : buisnesses) {
+        std::cout << x << "\n";
+    }
+
+    cout << "\n";
+
+    while (wantContinue) {
+        string yayNay = "";
+        cout << "Would you like to continue entering buisnesses?\n";
+        getline(cin, yayNay);
+
+        cout << "\n";
+        
+        if (yayNay != "y"){
+            cout << "thanks for your buisnesses";
+            wantContinue = false;
+        }
+        else {
+            buisness = "";
+            cout << "Please enter buisness name!\n";
+            getline(cin, buisness);
+
+            cout << "\nYour Buisnesses are:\n";
+
+            listFormatter(buisness);
+
+            for (string x : buisnesses) {
+                std::cout << x << "\n";
+            }
+
+            cout << "\n";
+        }
+
+        
+    }
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
