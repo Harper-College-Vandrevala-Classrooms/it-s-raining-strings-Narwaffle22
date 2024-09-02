@@ -4,14 +4,41 @@
 #include <iostream>
 #include <list>
 #include <string>
+#include <vector>
+#include <algorithm>
 using namespace std;
 list<string> buisnesses;
-
+list<string> correctResponges = { "yes", "y" };
 void listFormatter(string item) {
-    list<string>::iterator itr = buisnesses.begin();
-    //++itr;
+    //adds buisness
+    buisnesses.push_back(item);
+
+    //formats the list in alphabetical
+    buisnesses.sort();
+
+}
+
+bool strcmp_case_insensitive(string str1) {
+    //instantiating the strings
+    string firstString = "";
+    list<string>::iterator itd = correctResponges.begin();
+
+    //defing the strings, removing the spaces, and lowercasing everything for comparison
+    for (char& c : str1) {
+        if (c != 32) {
+            firstString += tolower(c);
+        }
+    }
+
+    //compare and return
+    for (int i = 0; i < correctResponges.size(); i++) {
+        if (firstString.compare(*itd) == 0)
+            return true;
+        ++itd;
+    }
+    return false;
     
-    buisnesses.insert(itr, item);
+        
 }
 
 int main()
@@ -23,7 +50,7 @@ int main()
 
     cout << "\nYour Buisness is:\n";
 
-    listFormatter(buisness);
+    buisnesses.push_back(buisness);
 
     for (string x : buisnesses) {
         std::cout << x << "\n";
@@ -38,7 +65,7 @@ int main()
 
         cout << "\n";
         
-        if (yayNay != "y"){
+        if (!strcmp_case_insensitive(yayNay)){
             cout << "thanks for your buisnesses";
             wantContinue = false;
         }
